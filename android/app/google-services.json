@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "344184323851",
+    "project_id": "shart-app",
+    "storage_bucket": "shart-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344184323851:android:072b2e0ee2dcc7800b6c0e",
+        "android_client_info": {
+          "package_name": "com.example.shart_laga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344184323851-tf73fidprmcsgp5tauc7enivfcoulbca.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shart_laga",
+            "certificate_hash": "8076dd2f2de9e32a76f48daeb096e1dfb1ae3032"
+          }
+        },
+        {
+          "client_id": "344184323851-u9mrmbmla677v7qdq00poelvdvd3cp18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdIkx9jSn89tLqw_bOZNKidWyHviMeQJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344184323851-u9mrmbmla677v7qdq00poelvdvd3cp18.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

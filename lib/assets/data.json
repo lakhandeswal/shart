@@ -1,0 +1,78 @@
+{
+    "users":{
+        "lakhandeswal":{
+            "name":"Lakhan deswal",
+            "email":"deswallakhan@gmail.com",
+            "bets":[
+                "300422",
+                "280422"
+            ]
+            },
+        "candy":{
+            "name":"Candy",
+            "email":"candy100@gmail.com",
+            "bets":[
+                "280422"
+            ]
+        },
+        "jatindahiya":{
+            "name":"Jatin Dahiya",
+            "email":"jatindahiya17@gmail.com",
+            "bets":[
+                "300422"
+            ]
+        },
+        "navditadahiya":{
+            "name":"Navdita Dahiya",
+            "email":"navditadahiya2006@gmail.com",
+            "bets":[
+                "010522",
+                "300422"
+            ]
+        }
+    },
+    "bets":{ 
+        "lakhandeswal":{
+            "300422":{
+                "jatindahiya":{
+                    "title":"elon musk twitter deal",
+                    "description":"will elon musk buy twitter ?",
+                    "challenger":"lakhandeswal",
+                    "acceptor":"jatindahiya",
+                    "amount":100
+                },
+                "navditadahiya":{
+                    "title":"rain today",
+                    "description":"will there be rain today ?",
+                    "challenger":"navditadahiya",
+                    "acceptor":"lakhandeswal",
+                    "amount":70
+                }
+            },
+            "280422":[{
+                "title":"ipl winner",
+                "description":"who is going to win TATA ipl 2022 ?",
+                "challenger":"lakhandeswal",
+                "acceptor":"candy",
+                "amount":5
+        },
+        {
+            "title":"rain today",
+            "description":"will there be rain today ?",
+            "challenger":"navditadahiya",
+            "acceptor":"lakhandeswal",
+            "amount":70
+        }]},
+        "navditadahiya":{
+            "300422":[
+                {
+                    "title":"rain today",
+                    "description":"will there be rain today ?",
+                    "challenger":"navditadahiya",
+                    "acceptor":"lakhandeswal",
+                    "amount":70
+                }
+            ]
+        }
+        }
+    }
