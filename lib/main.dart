@@ -1,9 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shart_laga/logic/cubits/user_cubit.dart';
+import 'package:shart_laga/logic/cubits/add_user_cubit/add_user_cubit.dart';
+import 'package:shart_laga/logic/cubits/user_cubit/user_cubit.dart';
+import 'package:shart_laga/userspage.dart';
 import 'package:shart_laga/utils/colors.dart';
-import 'logic/cubits/user_state.dart';
+import 'data/firebaseuser.dart';
+import 'logic/cubits/user_cubit/user_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,20 +17,26 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => UserInfo(),
-          ),
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData.dark().copyWith(
-              primaryColor: primaryColor,
-              scaffoldBackgroundColor: scaffoldBgColor),
-          home: MyHomePage(title: '\$hart'),
-        ));
+    return RepositoryProvider(
+      create: (context) => UserDetails(),
+      child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => UserInfo(context.read<UserDetails>()),
+            ),
+            BlocProvider(
+              create: (context) => AddUserCubit(),
+            ),
+          ],
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData.dark().copyWith(
+                primaryColor: primaryColor,
+                scaffoldBackgroundColor: scaffoldBgColor),
+            home: MyHomePage(title: '\$hart'),
+          )),
+    );
   }
 }
 
@@ -60,30 +69,37 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(state.user.username.toString()),
+                      InkWell(
+                          onTap: () {
+                            context.read<UserInfo>().emitUserStream();
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return UsersPage();
+                            }));
+                          },
+                          child: Text(state.user.username.toString())),
                       SizedBox(
                         height: 20.0,
                       ),
                       Text(state.user.email.toString()),
                       Padding(
-                        padding: const EdgeInsets.only(left: 30.0),
+                        padding: const EdgeInsets.only(left: 8.0, right: 16.0),
                         child: SizedBox(
-                            height: 200.0,
+                            height: MediaQuery.of(context).size.height - 200,
                             child: ListView.builder(
                                 itemCount: state.user.bets.length,
                                 itemBuilder: (context, pos) {
                                   final bets = state.user.bets[pos];
                                   return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text('Bet ${pos + 1}',
                                           style: TextStyle(
-                                              fontSize: 24.0,
+                                              fontSize: 20.0,
                                               color: primaryColor,
-                                              fontWeight: FontWeight.bold)),
+                                              fontWeight: FontWeight.w700)),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Column(
@@ -92,11 +108,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(bets.title),
+                                            Text(
+                                              'Title : ${bets.title}',
+                                              style: TextStyle(
+                                                  color: primaryColor),
+                                            ),
                                             Text(bets.description),
-                                            Text(bets.challenger),
-                                            Text(bets.accepter),
-                                            Text(bets.amount.toString())
+                                            FittedBox(
+                                              child: Text(
+                                                  '${bets.challenger} vs ${bets.accepter}'),
+                                            ),
+                                            Text('Amount : ' +
+                                                bets.amount.toString()),
                                           ],
                                         ),
                                       ),
@@ -120,17 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
             }),
             MaterialButton(
               onPressed: () {
-                setState(() {
-                  a = a + 1;
-                });
-                print(a);
-                if (a % 2 == 0) {
-                  print('getting user info');
-                  BlocProvider.of<UserInfo>(context).getuserinfo();
-                } else {
-                  print('trying to login');
-                  BlocProvider.of<UserInfo>(context).login();
-                }
+                //BlocProvider.of<AddUserCubit>(context).onBetAdd();
+                BlocProvider.of<UserInfo>(context).getuserinfo();
               },
               color: primaryColor,
               child: Text('Logout'),

@@ -20,20 +20,18 @@ class Bet extends Equatable {
         this.amount
       ];
 
-  // Bet.fromJson(Map json)
-  //        :title = json['title'],
-  //         description = json['description'],
-  //         challenger = json['challenger'],
-  //         accepter = json['accepter'],
-  //         amount = json['amount']
+  static fromjson(json) {
+    return Bet(json['title'], json['description'], json['challenger'],
+        json['accepter'], json['amount']);
+  }
 
-  // tojson() {
-  //   return {
-  //       'title': this.title,
-  //       'description': this.description,
-  //       'challenger': this.challenger,
-  //       'accepter': this.accepter,
-  //       'amount': this.amount
-  //     };
-  //}
+  tojson() {
+    return {
+      'title': this.title,
+      'description': this.description,
+      'challenger': this.challenger,
+      'accepter': this.accepter,
+      'amount': this.amount
+    };
+  }
 }
